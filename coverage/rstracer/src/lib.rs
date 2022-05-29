@@ -24,7 +24,7 @@ struct CTracer {
 struct DataStackEntry {
     disposition: Option<pyo3::Py<CFileDisposition>>,
     last_line: i32,
-    _started_context: bool,
+    started_context: bool,
 }
 
 #[pyo3::prelude::pymethods]
