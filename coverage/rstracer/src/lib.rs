@@ -1,3 +1,4 @@
+use std::cell::Cell;
 use pyo3::AsPyPointer;
 use pyo3::IntoPy;
 use std::collections::HashSet;
@@ -230,6 +231,19 @@ extern "C" fn trace_func(
     event: c_int,
     _arg: *mut pyo3::ffi::PyObject,
 ) -> c_int {
+    // Calling `acquire_gil` ocassionally is necessary to flush pyo3's
+    // `register_owned` stack. Calling it on every invocation has a huge
+    // performance penalty. So we call it sometimes.
+    thread_local! {
+        pub static CALL_COUNTER: Cell<u32> = Cell::new(0);
+    }
+    CALL_COUNTER.with(|c| {
+        c.set(c.get() + 1);
+        if c.get() > 1024 * 1024 * 10 {
+            let _ = pyo3::Python::acquire_gil();
+        }
+    });
+
     let py = unsafe { pyo3::Python::assume_gil_acquired() };
 
     let mut slf = unsafe { py.from_borrowed_ptr::<pyo3::PyCell<CTracer>>(tracer) }.borrow_mut();
