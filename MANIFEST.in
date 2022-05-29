@@ -21,6 +21,7 @@ include igor.py
 include metacov.ini
 include pylintrc
 include setup.py
+include pyproject.toml
 include tox.ini
 include .editorconfig
 include .readthedocs.yml

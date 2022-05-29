@@ -138,47 +138,11 @@ setup_args = dict(
 # A replacement for the build_ext command which raises a single exception
 # if the build fails, so we can fallback nicely.
 
-ext_errors = (
-    errors.CCompilerError,
-    errors.DistutilsExecError,
-    errors.DistutilsPlatformError,
-)
-if sys.platform == 'win32':
-    # distutils.msvc9compiler can raise an IOError when failing to
-    # find the compiler
-    ext_errors += (IOError,)
-
-
 class BuildFailed(Exception):
     """Raise this to indicate the C extension wouldn't build."""
     def __init__(self):
         Exception.__init__(self)
         self.cause = sys.exc_info()[1]      # work around py 2/3 different syntax
-
-
-class ve_build_ext(build_ext):
-    """Build C extensions, but fail with a straightforward exception."""
-
-    def run(self):
-        """Wrap `run` with `BuildFailed`."""
-        try:
-            build_ext.run(self)
-        except errors.DistutilsPlatformError as exc:
-            raise BuildFailed() from exc
-
-    def build_extension(self, ext):
-        """Wrap `build_extension` with `BuildFailed`."""
-        try:
-            # Uncomment to test compile failure handling:
-            #   raise errors.CCompilerError("OOPS")
-            build_ext.build_extension(self, ext)
-        except ext_errors as exc:
-            raise BuildFailed() from exc
-        except ValueError as err:
-            # this can happen on Windows 64 bit, see Python issue 7511
-            if "'path'" in str(err):    # works with both py 2/3
-                raise BuildFailed() from err
-            raise
 
 # There are a few reasons we might not be able to compile the C extension.
 # Figure out if we should attempt the C extension or not.
@@ -194,22 +158,13 @@ if '__pypy__' in sys.builtin_module_names:
     compile_extension = False
 
 if compile_extension:
-    setup_args.update(dict(
-        ext_modules=[
-            Extension(
-                "coverage.tracer",
-                sources=[
-                    "coverage/ctracer/datastack.c",
-                    "coverage/ctracer/filedisp.c",
-                    "coverage/ctracer/module.c",
-                    "coverage/ctracer/tracer.c",
-                ],
-            ),
-        ],
-        cmdclass={
-            'build_ext': ve_build_ext,
-        },
-    ))
+    from setuptools_rust import RustExtension
+    setup_args["rust_extensions"] = [
+        RustExtension(
+            "coverage.tracer",
+            "coverage/rstracer/Cargo.toml",
+        )
+    ]
 
 
 def main():
