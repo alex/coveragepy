@@ -243,11 +243,15 @@ fn frame_get_line_number(frame: &PyFrame) -> i32 {
 fn frame_get_code<'p>(py: pyo3::Python<'p>, frame: &'p PyFrame) -> &'p PyCode {
     unsafe {
         #[cfg(Py_3_9)]
-        let code = pyo3::ffi::PyFrame_GetCode(frame.as_ptr());
+        let code = py.from_owned_ptr(pyo3::ffi::PyFrame_GetCode(frame.as_ptr()));
         #[cfg(not(Py_3_9))]
-        let code = (*frame.as_ptr().cast::<pyo3::ffi::PyFrameObject>()).f_code;
+        let code = py.from_borrowed_ptr(
+            (*frame.as_ptr().cast::<pyo3::ffi::PyFrameObject>())
+                .f_code
+                .cast(),
+        );
 
-        py.from_borrowed_ptr(code.cast())
+        code
     }
 }
 
