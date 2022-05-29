@@ -269,7 +269,7 @@ fn code_get_firstlineno(code: &PyCode) -> i32 {
 
 fn code_get_code<'p>(py: pyo3::Python<'p>, code: &'p PyCode) -> &'p [u8] {
     let py_code_bytes: &PyBytes =
-        unsafe { py.from_owned_ptr((*code.as_ptr().cast::<pyo3::ffi::PyCodeObject>()).co_code) };
+        unsafe { py.from_borrowed_ptr((*code.as_ptr().cast::<pyo3::ffi::PyCodeObject>()).co_code) };
     py_code_bytes.as_bytes()
 }
 
