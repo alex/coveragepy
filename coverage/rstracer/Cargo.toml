@@ -7,7 +7,7 @@ publish = false
 
 [dependencies]
 # pyo3 = { version = "0.16" }
-pyo3 = { git = "https://github.com/pyo3/pyo3" }
+pyo3 = { git = "https://github.com/alex/pyo3", branch = "frame-code-objects" }
 
 [features]
 extension-module = ["pyo3/extension-module"]

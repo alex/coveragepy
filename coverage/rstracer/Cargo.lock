@@ -83,7 +83,7 @@ dependencies = [
 [[package]]
 name = "pyo3"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#f84c740e414f712348629f8845f52a254c7d55e5"
+source = "git+https://github.com/alex/pyo3?branch=frame-code-objects#1218441dc5321b6a3bca89863aacd314cb50867a"
 dependencies = [
  "cfg-if",
  "indoc",
@@ -98,7 +98,7 @@ dependencies = [
 [[package]]
 name = "pyo3-build-config"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#f84c740e414f712348629f8845f52a254c7d55e5"
+source = "git+https://github.com/alex/pyo3?branch=frame-code-objects#1218441dc5321b6a3bca89863aacd314cb50867a"
 dependencies = [
  "once_cell",
  "target-lexicon",
@@ -107,7 +107,7 @@ dependencies = [
 [[package]]
 name = "pyo3-ffi"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#f84c740e414f712348629f8845f52a254c7d55e5"
+source = "git+https://github.com/alex/pyo3?branch=frame-code-objects#1218441dc5321b6a3bca89863aacd314cb50867a"
 dependencies = [
  "libc",
  "pyo3-build-config",
@@ -116,7 +116,7 @@ dependencies = [
 [[package]]
 name = "pyo3-macros"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#f84c740e414f712348629f8845f52a254c7d55e5"
+source = "git+https://github.com/alex/pyo3?branch=frame-code-objects#1218441dc5321b6a3bca89863aacd314cb50867a"
 dependencies = [
  "proc-macro2",
  "pyo3-macros-backend",
@@ -127,7 +127,7 @@ dependencies = [
 [[package]]
 name = "pyo3-macros-backend"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#f84c740e414f712348629f8845f52a254c7d55e5"
+source = "git+https://github.com/alex/pyo3?branch=frame-code-objects#1218441dc5321b6a3bca89863aacd314cb50867a"
 dependencies = [
  "proc-macro2",
  "quote",
