@@ -215,7 +215,10 @@ impl PyFrame {
     }
 
     fn get_code(&self) -> *mut pyo3::ffi::PyCodeObject {
+        #[cfg(Py_3_9)]
         unsafe { pyo3::ffi::PyFrame_GetCode(self.0) }
+        #[cfg(not(Py_3_9))]
+        unsafe { (*self.0).f_code }
     }
 }
 
