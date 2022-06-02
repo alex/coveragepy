@@ -50,9 +50,9 @@ checksum = "7709cef83f0c1f58f666e746a08b21e0085f7440fa6a29cc194d68aac97a4225"
 
 [[package]]
 name = "parking_lot"
-version = "0.12.0"
+version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "87f5ec2493a61ac0506c0f4199f99070cbe83857b0337006a30f3e6719b8ef58"
+checksum = "3742b2c103b9f06bc9fff0a37ff4912935851bee6d36f3c02bcc755bcfec228f"
 dependencies = [
  "lock_api",
  "parking_lot_core",
@@ -83,7 +83,7 @@ dependencies = [
 [[package]]
 name = "pyo3"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#8191153eba76b80619747d9a057f14f8e3738d67"
+source = "git+https://github.com/pyo3/pyo3#425808e6327f087f15e18755214b5631009833a1"
 dependencies = [
  "cfg-if",
  "indoc",
@@ -98,7 +98,7 @@ dependencies = [
 [[package]]
 name = "pyo3-build-config"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#8191153eba76b80619747d9a057f14f8e3738d67"
+source = "git+https://github.com/pyo3/pyo3#425808e6327f087f15e18755214b5631009833a1"
 dependencies = [
  "once_cell",
  "target-lexicon",
@@ -107,7 +107,7 @@ dependencies = [
 [[package]]
 name = "pyo3-ffi"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#8191153eba76b80619747d9a057f14f8e3738d67"
+source = "git+https://github.com/pyo3/pyo3#425808e6327f087f15e18755214b5631009833a1"
 dependencies = [
  "libc",
  "pyo3-build-config",
@@ -116,7 +116,7 @@ dependencies = [
 [[package]]
 name = "pyo3-macros"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#8191153eba76b80619747d9a057f14f8e3738d67"
+source = "git+https://github.com/pyo3/pyo3#425808e6327f087f15e18755214b5631009833a1"
 dependencies = [
  "proc-macro2",
  "pyo3-macros-backend",
@@ -127,7 +127,7 @@ dependencies = [
 [[package]]
 name = "pyo3-macros-backend"
 version = "0.16.5"
-source = "git+https://github.com/pyo3/pyo3#8191153eba76b80619747d9a057f14f8e3738d67"
+source = "git+https://github.com/pyo3/pyo3#425808e6327f087f15e18755214b5631009833a1"
 dependencies = [
  "proc-macro2",
  "quote",

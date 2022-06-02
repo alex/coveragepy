@@ -1,3 +1,5 @@
+#![deny(unsafe_op_in_unsafe_fn)]
+
 use pyo3::types::{PyBytes, PyCode, PyDict, PyFrame, PyModule, PySet, PyString};
 use pyo3::AsPyPointer;
 use pyo3::IntoPy;
@@ -273,9 +275,7 @@ fn code_get_code<'p>(py: pyo3::Python<'p>, code: &'p PyCode) -> &'p [u8] {
     py_code_bytes.as_bytes()
 }
 
-// This ought to be an `unsafe fn` but `PyEval_SetTrace` takes a regular `fn`
-// so what can you do.
-extern "C" fn trace_func(
+unsafe extern "C" fn trace_func(
     tracer: *mut pyo3::ffi::PyObject,
     frame: *mut pyo3::ffi::PyFrameObject,
     event: c_int,
